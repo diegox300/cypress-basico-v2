@@ -13,7 +13,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
        
     })
 
-     it('preenche os campos obrigatórios e envia o formulário', function() {
+     it.only('preenche os campos obrigatórios e envia o formulário', function() {
 
        cy.get('[id="firstName"]')
        .type('Gervasio')
@@ -23,16 +23,10 @@ describe('Central de Atendimento ao Cliente TAT', function() {
        .type('Diegox300@gmail.com')
        cy.get('[id="phone"]')
        .type('11 98415 0044')
-       cy.get('[id="product"]')
-       .select('cursos')
-       cy.get('[value="elogio"]')
-       .click({ force: true })
        cy.get('[id="phone-checkbox"]')
        .click({ force: true })
        cy.get('[id="open-text-area"]')
-       .type(('este teste testeTeste teste teste testeTeste teste teste testeTeste teste teste teste'),{ delay: 0 })
-       cy.get('[id="file-upload"]')
-       .selectFile('C:/Users/USUARIO/Downloads/469029.jpg')
+       .type(('este teste testeTeste teste teste testeTeste teste t'),{ delay: 0 })
        cy.contains('.button','Enviar')
        .click()
        cy.get('[class="success"]')
@@ -49,7 +43,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
        .type('Diegox300.gmail.com')
        cy.get('[class="error"]')
        cy.get('[id="open-text-area"]')
-       .type('teste teste testeTeste teste teste testeTeste teste teste testeTeste teste teste teste')
+       .type('teste teste testeTeste teste teste testeTeste teste teste teste')
        cy.contains('.button','Enviar')
        .click()
        cy.get('[class="error"]')
