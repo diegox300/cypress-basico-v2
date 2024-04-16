@@ -120,11 +120,13 @@ describe('Central de Atendimento ao Cliente TAT', function() {
    
      })
 
-    it('Envia o formuário com sucesso usando um comando customizado', function() {
+     Cypress._.times(5, () => { 
+             it('Envia o formuário com sucesso usando um comando customizado', function() {
 
         cy.fillMandatoryFieldsAndSubmit()
    
      })
+    })
 
      it('Marca o tipo de atendimento Feedback', function() {
 
@@ -198,5 +200,29 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.url().should('include', 'privacy.html')
         
      })
+
+     it('exibe e esconde as mensagens de sucesso e erro usando o .invoke()', function() {
+        cy.get('.success')
+        .should('not.be.visible')
+        .invoke('show')
+        .should('be.visible')
+        .and('contain', 'Mensagem enviada com sucesso.')
+        .invoke('hide')
+        .should('not.be.visible')
+        cy.get('.error')
+        .should('not.be.visible')
+        .invoke('show')
+        .should('be.visible')
+        .and('contain', 'Valide os campos obrigatórios!')
+        .invoke('hide')
+        .should('not.be.visible')
+    })
      
+    it('preenche a area de texto usando o comando invoke', function() {
+        const longText = Cypress._.repeat('0123456789', 20)
+        cy.get('[id="open-text-area"]')
+        .invoke('val', longText)
+        .should('have.value', longText)
+    })
+
   })    
