@@ -24,7 +24,8 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
        Cypress.Commands.add('fillMandatoryFieldsAndSubmit', () => { 
-       cy.get('[id="firstName"]')
+      cy.clock()
+        cy.get('[id="firstName"]')
        .type('Gervasio')
        cy.get('[id="lastName"]')
        .type('Diego')
@@ -46,4 +47,8 @@
        .click()
        cy.get('[class="success"]')
        .should('be.visible')
+
+       cy.tick(3000)
+       cy.get('[class="success"]')
+       .should('not.be.visible')
     });
